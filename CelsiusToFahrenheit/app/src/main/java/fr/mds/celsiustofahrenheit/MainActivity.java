@@ -27,8 +27,14 @@ public class MainActivity extends AppCompatActivity {
         bt_show_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                result = Float.parseFloat(et_celsius.getText().toString()) * 9 / 5 + 32;
-                tv_fahrenheit_result.setText(result + "F°");
+
+                try {
+                    result = Float.parseFloat(et_celsius.getText().toString()) * 9 / 5 + 32;
+                    tv_fahrenheit_result.setText(result + "F°");
+                } catch (NumberFormatException e) {
+                    tv_fahrenheit_result.setText("Is not a number");
+                    return;
+                }
             }
         });
     }

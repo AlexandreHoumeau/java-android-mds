@@ -14,6 +14,8 @@ public class Quote {
 
     public Quote(String strQuote) {
         super();
+        this.rating = 0;
+        this.creationDate = new Date();
     }
 
     public Quote(String strQuote, Integer rating, Date creationDate) {

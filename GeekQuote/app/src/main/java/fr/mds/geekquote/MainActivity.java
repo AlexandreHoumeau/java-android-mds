@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,8 +15,8 @@ import fr.mds.geekquote.model.Quote;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "GeekQuote";
-    Date myDate = new Date();
-    ArrayList<Quote> quotes = new ArrayList<Quote>();
+    private Date myDate = new Date();
+    private ArrayList<Quote> quotes = new ArrayList<Quote>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +31,13 @@ public class MainActivity extends AppCompatActivity {
             addQuotes(c.toString());
         }
 
-        for (Quote c : quotes) {
-            Log.d(TAG, c.toString());
-        }
+        Log.d(TAG, quotes.toString());
 
     }
 
     protected void addQuotes(String quote) {
-        quotes.add(new Quote(quote, 5, myDate));
+        quotes.add(new Quote(quote));
+
+        Toast.makeText(this, quote, Toast.LENGTH_SHORT).show();
     }
 }
