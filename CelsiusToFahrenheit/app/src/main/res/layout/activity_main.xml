@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/et_celsius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Celsius"/>
+
+    <TextView
+        android:id="@+id/tv_fahrenheit_result"
+        android:layout_width="175dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="20dp"
+        android:text="Hello Unknown"
+        android:textSize="25dp" />
+
+    <Button
+        android:id="@+id/bt_show_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        />
+</LinearLayout>

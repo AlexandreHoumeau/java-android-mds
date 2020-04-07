@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GeekQuote</string>
+    <string-array name="quote_array">
+        <item>I\'m sorry, Dave. I\'m afraid I can\'t do that.</item>
+        <item>With great power there must also come – great responsibility.</item>
+        <item>If I\'m not back in five minutes, just wait longer.</item>
+        <item>Never argue with the data!</item>
+        <item>Greetings, programs!</item>
+    </string-array>
+</resources>
