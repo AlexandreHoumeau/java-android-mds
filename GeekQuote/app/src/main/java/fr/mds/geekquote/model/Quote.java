@@ -1,33 +1,39 @@
 package fr.mds.geekquote.model;
 
+import android.util.Log;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Quote {
+import fr.mds.geekquote.activity.MainActivity;
+
+public class Quote implements Serializable {
     private String strQuote;
-    private Integer rating;
+    private Float rating;
     private Date creationDate;
 
-    public Quote() {
+    public Quote(Object response) {
     }
 
     public Quote(String strQuote) {
         super();
         this.strQuote = strQuote;
-        this.rating = 0;
+        this.rating = 0F;
         this.creationDate = new Date();
     }
 
-    public Quote(String strQuote, Integer rating, Date creationDate) {
+    public Quote(String strQuote, Float rating, Date creationDate) {
         this.strQuote = strQuote;
         this.rating = rating;
         this.creationDate = creationDate;
     }
 
+
     public void setStrQuote(String strQuote) {
         this.strQuote = strQuote;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
@@ -39,7 +45,7 @@ public class Quote {
         return strQuote;
     }
 
-    public Integer getRating() {
+    public Float getRating() {
         return rating;
     }
 

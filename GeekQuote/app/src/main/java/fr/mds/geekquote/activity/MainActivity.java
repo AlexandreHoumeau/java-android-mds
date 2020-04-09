@@ -1,8 +1,12 @@
 package fr.mds.geekquote.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +29,7 @@ import fr.mds.geekquote.R;
 import fr.mds.geekquote.adapter.QuoteListAdapter;
 import fr.mds.geekquote.model.Quote;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends Activity {
 
     public static final String TAG = "GeekQuote";
     private ArrayList<Quote> quoteList = new ArrayList<Quote>();
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity  {
     private Button bt_main_add;
     private LinearLayout ll_list_quotes;
     private ListView lv_main_list;
+    private QuoteListAdapter quoteListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +48,19 @@ public class MainActivity extends AppCompatActivity  {
         ll_list_quotes = (LinearLayout)findViewById(R.id.list_item);
         lv_main_list = findViewById(R.id.lv_main_list);
 
+        quoteListAdapter = new QuoteListAdapter(this, quoteList);
+        lv_main_list.setAdapter(quoteListAdapter);
+
+        lv_main_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object listItem = lv_main_list.getItemAtPosition(position);
+                Intent intent = new Intent(MainActivity.this, QuoteActivity.class);
+                intent.putExtra("data", (Serializable) listItem);
+                startActivityForResult(intent, 0);
+            }
+        });
+
         bt_main_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,23 +70,26 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     protected void addQuotes(String quote) {
-        quoteList.add(new Quote(quote));
-        Log.d(TAG, String.valueOf(quoteList));
-
-        QuoteListAdapter quoteListAdapter = new QuoteListAdapter(this, quoteList);
-        lv_main_list.setAdapter(quoteListAdapter);
+        quoteList.add(0,new Quote(quote));
+        quoteListAdapter.notifyDataSetChanged();
         et_main_quote.getText().clear();
-
-//        final TextView rowTextView = new TextView(this);
-//        ll_list_quotes.addView(rowTextView);
-//
-//        rowTextView.setText(quote);
-//        rowTextView.setTextSize(23);
-//
-//        if (quotes.size() % 2 == 0) {
-//            rowTextView.setBackgroundColor(0xFF7947FF);
-//            rowTextView.setTextColor(0xFFFFFFFF);
-//        }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (data != null && data.getExtras() != null) {
+            String strQuote = data.getExtras().getString("strQuote");
+            Float rating = data.getExtras().getFloat("rating");
+
+            for(int i=0 ; i<quoteListAdapter.getCount() ; i++){
+                Quote quote = quoteListAdapter.getItem(i);
+                if (quote.getStrQuote().equals(strQuote)) {
+                    Log.d(TAG, quote.getStrQuote() + " - " + strQuote);
+                    quote.setRating(rating);
+                    quoteListAdapter.notifyDataSetChanged();
+                }
+            }
+        }
+    }
 }

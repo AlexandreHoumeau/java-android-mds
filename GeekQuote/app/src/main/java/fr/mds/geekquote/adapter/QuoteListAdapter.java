@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import fr.mds.geekquote.R;
@@ -32,12 +34,12 @@ public class QuoteListAdapter extends ArrayAdapter<Quote> {
         }
 
         TextView tv_quote = convertView.findViewById(R.id.tv_quote);
-        RatingBar rb_rating = (RatingBar) convertView.findViewById(R.id.rb_rating);
+//        RatingBar rb_rating = (RatingBar) convertView.findViewById(R.id.rb_rating);
         TextView tv_creation_date = convertView.findViewById(R.id.tv_creation_date);
 
         tv_quote.setText(q.getStrQuote());
-        rb_rating.setRating(q.getRating());
-        tv_creation_date.setText(java.text.DateFormat.getDateInstance().format(q.getCreationDate()));
+//        rb_rating.setRating(q.getRating());
+        tv_creation_date.setText(java.text.DateFormat.getDateTimeInstance().format(q.getCreationDate()));
 
         return convertView;
     }
