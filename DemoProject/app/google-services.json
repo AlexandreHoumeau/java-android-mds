@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "202414293924",
+    "firebase_url": "https://alexandredemoproject.firebaseio.com",
+    "project_id": "alexandredemoproject",
+    "storage_bucket": "alexandredemoproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202414293924:android:5d72b84e7ae8eee5eab731",
+        "android_client_info": {
+          "package_name": "fr.mds.demoproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202414293924-scn2otj54vhs00tesrn5rt0gtfgsgklb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXsPTgh-MxyxlCBsDBCv-RPkAQB1M8ULU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202414293924-scn2otj54vhs00tesrn5rt0gtfgsgklb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

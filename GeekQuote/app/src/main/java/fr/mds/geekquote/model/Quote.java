@@ -2,8 +2,6 @@ package fr.mds.geekquote.model;
 
 import java.util.Date;
 
-import fr.mds.geekquote.MainActivity;
-
 public class Quote {
     private String strQuote;
     private Integer rating;
@@ -14,6 +12,7 @@ public class Quote {
 
     public Quote(String strQuote) {
         super();
+        this.strQuote = strQuote;
         this.rating = 0;
         this.creationDate = new Date();
     }

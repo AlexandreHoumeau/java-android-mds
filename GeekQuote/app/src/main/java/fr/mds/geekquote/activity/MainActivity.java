@@ -1,4 +1,4 @@
-package fr.mds.geekquote;
+package fr.mds.geekquote.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,24 +11,27 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import fr.mds.geekquote.R;
+import fr.mds.geekquote.adapter.QuoteListAdapter;
 import fr.mds.geekquote.model.Quote;
 
 public class MainActivity extends AppCompatActivity  {
 
     public static final String TAG = "GeekQuote";
-    private ArrayList<Quote> quotes = new ArrayList<Quote>();
+    private ArrayList<Quote> quoteList = new ArrayList<Quote>();
     private EditText et_main_quote;
     private Button bt_main_add;
     private LinearLayout ll_list_quotes;
-    private Integer count = 0;
-
+    private ListView lv_main_list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity  {
         et_main_quote = findViewById(R.id.et_main_quote);
         bt_main_add = findViewById(R.id.bt_main_add);
         ll_list_quotes = (LinearLayout)findViewById(R.id.list_item);
-        
+        lv_main_list = findViewById(R.id.lv_main_list);
 
         bt_main_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,22 +48,26 @@ public class MainActivity extends AppCompatActivity  {
                 addQuotes(et_main_quote.getText().toString());
             }
         });
-
-
     }
 
     protected void addQuotes(String quote) {
-        count++;
-        quotes.add(new Quote(quote));
-        Toast.makeText(this, quote, Toast.LENGTH_SHORT).show();
-        final TextView rowTextView = new TextView(this);
-        ll_list_quotes.addView(rowTextView);
-        rowTextView.setText(quote);
-        rowTextView.setTextSize(23);
-        if (count % 2 == 0) {
-            rowTextView.setBackgroundColor(0xFF7947FF);
-            rowTextView.setTextColor(0xFFFFFFFF);
-        }
+        quoteList.add(new Quote(quote));
+        Log.d(TAG, String.valueOf(quoteList));
+
+        QuoteListAdapter quoteListAdapter = new QuoteListAdapter(this, quoteList);
+        lv_main_list.setAdapter(quoteListAdapter);
+        et_main_quote.getText().clear();
+
+//        final TextView rowTextView = new TextView(this);
+//        ll_list_quotes.addView(rowTextView);
+//
+//        rowTextView.setText(quote);
+//        rowTextView.setTextSize(23);
+//
+//        if (quotes.size() % 2 == 0) {
+//            rowTextView.setBackgroundColor(0xFF7947FF);
+//            rowTextView.setTextColor(0xFFFFFFFF);
+//        }
     }
 
 }
