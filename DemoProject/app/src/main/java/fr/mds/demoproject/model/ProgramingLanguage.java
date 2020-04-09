@@ -1,4 +1,4 @@
-package fr.mds.demoproject;
+package fr.mds.demoproject.model;
 
 public class ProgramingLanguage {
 
@@ -31,9 +31,6 @@ public class ProgramingLanguage {
 
     @Override
     public String toString() {
-        return "ProgramingLanguage{" +
-                "name='" + name + '\'' +
-                ", detail='" + detail + '\'' +
-                '}';
+        return name;
     }
 }
