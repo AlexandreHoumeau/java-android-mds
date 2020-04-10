@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -34,13 +35,21 @@ public class QuoteListAdapter extends ArrayAdapter<Quote> {
         }
 
         TextView tv_quote = convertView.findViewById(R.id.tv_quote);
-//        RatingBar rb_rating = (RatingBar) convertView.findViewById(R.id.rb_rating);
+        TextView rating = convertView.findViewById(R.id.rating);
         TextView tv_creation_date = convertView.findViewById(R.id.tv_creation_date);
-
+        ImageView rating_star_svg = convertView.findViewById(R.id.rating_star_svg);
         tv_quote.setText(q.getStrQuote());
-//        rb_rating.setRating(q.getRating());
+        rating.setText(q.getRating().toString());
         tv_creation_date.setText(java.text.DateFormat.getDateTimeInstance().format(q.getCreationDate()));
 
+
+        if (q.getRating() == 0) {
+            rating.setVisibility(View.INVISIBLE);
+            rating_star_svg.setVisibility(View.INVISIBLE);
+        } else {
+            rating.setVisibility(View.VISIBLE);
+            rating_star_svg.setVisibility(View.VISIBLE);
+        }
         return convertView;
     }
 

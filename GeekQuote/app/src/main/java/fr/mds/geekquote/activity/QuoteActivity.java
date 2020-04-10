@@ -38,7 +38,6 @@ public class QuoteActivity extends Activity implements View.OnClickListener {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            String message = bundle.getString("message");
 
             quote = (Quote) bundle.getSerializable("data");
             tv_quote.setText(quote.getStrQuote());
@@ -55,8 +54,7 @@ public class QuoteActivity extends Activity implements View.OnClickListener {
             Log.d(MainActivity.TAG, String.valueOf(quote));
             getIntent()
                     .putExtra("strQuote", quote.getStrQuote())
-                    .putExtra("rating", quote.getRating())
-                    .putExtra("creationDate", quote.getCreationDate());
+                    .putExtra("rating", quote.getRating());
             setResult(10, getIntent());
             finish();
         } else {

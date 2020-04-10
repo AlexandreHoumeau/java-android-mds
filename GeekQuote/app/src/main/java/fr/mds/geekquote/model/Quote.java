@@ -1,5 +1,7 @@
 package fr.mds.geekquote.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.io.Serializable;
@@ -7,7 +9,7 @@ import java.util.Date;
 
 import fr.mds.geekquote.activity.MainActivity;
 
-public class Quote implements Serializable {
+public class Quote implements Serializable, Parcelable {
     private String strQuote;
     private Float rating;
     private Date creationDate;
@@ -61,4 +63,41 @@ public class Quote implements Serializable {
                 ", creationDate=" + creationDate +
                 '}';
     }
+
+    protected Quote(Parcel in) {
+        strQuote = in.readString();
+        rating = in.readByte() == 0x00 ? null : in.readFloat();
+        long tmpCreationDate = in.readLong();
+        creationDate = tmpCreationDate != -1 ? new Date(tmpCreationDate) : null;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(strQuote);
+        if (rating == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeFloat(rating);
+        }
+        dest.writeLong(creationDate != null ? creationDate.getTime() : -1L);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Quote> CREATOR = new Parcelable.Creator<Quote>() {
+        @Override
+        public Quote createFromParcel(Parcel in) {
+            return new Quote(in);
+        }
+
+        @Override
+        public Quote[] newArray(int size) {
+            return new Quote[size];
+        }
+    };
 }
