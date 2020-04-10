@@ -30,6 +30,10 @@ public class Quote implements Serializable, Parcelable {
         this.creationDate = creationDate;
     }
 
+    public Quote() {
+
+    }
+
 
     public void setStrQuote(String strQuote) {
         this.strQuote = strQuote;
